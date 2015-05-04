@@ -381,7 +381,7 @@ namespace YasuoSharpV2
 
 
 
-                Drawing.DrawText(100,100,Color.Red,"targ Spells: "+TargetSpellDetector.ActiveTargeted.Count);
+
 
                 foreach (Obj_AI_Base jun in MinionManager.GetMinions(Yasuo.Player.ServerPosition, 700, MinionTypes.All, MinionTeam.Neutral))
                 {
