@@ -27,16 +27,11 @@ namespace Kalista
                 return;
 
             // Initialize classes
-            UpdateChecker.Initialize("Hellsing/LeagueSharp/master/Kalista");
+            UpdateChecker.Initialize("DurdenT/LeagueSharp/master/Kalista");
             SpellQueue.Initialize();
             SoulBoundSaver.Initialize();
 
-            // Enable damage indicators
-            Utility.HpBarDamageIndicator.DamageToUnit = Damages.GetTotalDamage;
-            Utility.HpBarDamageIndicator.Enabled = true;
 
-            // Enable E damage indicators
-            CustomDamageIndicator.Initialize(Damages.GetRendDamage);
 
             // Listen to additional events
             Game.OnUpdate += Game_OnGameUpdate;
@@ -124,9 +119,6 @@ namespace Kalista
                     Render.Circle.DrawCircle(player.Position, entry.Value.Value.Radius, entry.Value.Value.Color);
             }
 
-            // E damage on healthbar
-            CustomDamageIndicator.DrawingColor = Config.CircleLinks["drawDamageE"].Value.Color;
-            CustomDamageIndicator.Enabled = Config.CircleLinks["drawDamageE"].Value.Active;
 
             // Flee position the player moves to
             if (ActiveModes.fleeTargetPosition.HasValue)
