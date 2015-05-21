@@ -111,12 +111,9 @@ namespace SimpleEconomist
                 };
 
 
-                foreach (var slot in ObjectManager.Get<Obj_AI_Hero>().Where(x => x.IsValid).SelectMany(hero => hero.InventoryItems))
-                {
-                    Console.WriteLine(slot.Id);
-                }
 
-                ourototal = ouroptempo + (unit.ChampionsKilled * 300) + (unit.Assists * 75) + minion + supermonster + neutralminion;
+
+                ourototal = (ouroptempo) + (unit.ChampionsKilled * 300) + (unit.Assists * 75) + (minion + supermonster + neutralminion + wards);
 
 
 
