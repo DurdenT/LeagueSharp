@@ -126,7 +126,7 @@ namespace SimpleEconomist
                     string msg = "Total gold: " + (int)Math.Ceiling(ourototal);
                     if (unit.Name == Player.Name)
                     {
-                        msg = "Total gold: " + (int)Math.Ceiling(Player.Gold);
+                        msg = "Total gold: " + (int)Math.Ceiling(Player.GoldTotal);
                     }
 
                     var wts = Drawing.WorldToScreen(unit.Position);
