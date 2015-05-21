@@ -1,0 +1,151 @@
+﻿using System;
+using System.Linq;
+using LeagueSharp;
+using LeagueSharp.Common;
+using SharpDX;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+using System.Drawing;
+using System.IO;
+using System.Diagnostics;
+using Collision = LeagueSharp.Common.Collision;
+
+//Noob code, if you can help me improve it, thank you. Just learning. 
+
+
+namespace SimpleEconomist
+{
+
+    internal class Program
+    {
+        public static List<Obj_AI_Hero> allies = HeroManager.Allies;
+        public static List<Obj_AI_Hero> enemies = HeroManager.Enemies;
+        //public static Dictionary<Obj_AI_Hero, double> enemyDictionary = new Dictionary<Obj_AI_Hero, double>();
+        public static float ouroinicial = 475;
+        public static float ouroptempo = 0;
+        public static float ouropsegundo = 19;
+        public static float ourototal = 0;
+        public static float reward = 0;
+
+
+        public static Menu Menu;
+        public static Obj_AI_Hero Player
+        {
+            get { return ObjectManager.Player; }
+        }
+
+
+        public static void Main(string[] args)
+        {
+            CustomEvents.Game.OnGameLoad += Game_OnGameLoad;
+            Game.OnUpdate += Game_OnGameUpdate;
+            Drawing.OnDraw += Drawing_OnDraw;
+
+
+
+        }
+
+        private static void Game_OnGameLoad(EventArgs args)
+        {
+            Menu = new Menu("SimpleEconomist", "simpleecnomist", true);
+            Menu.AddItem(new MenuItem("Enable", "Enable", true).SetValue(true));
+            Menu.AddToMainMenu();
+
+        }
+
+
+        public static void Drawing_OnDraw(EventArgs args)
+        {
+
+
+            foreach (var unit in ObjectManager.Get<Obj_AI_Hero>().Where(h => h.IsValid && h.IsHPBarRendered))
+            {
+
+
+
+
+
+                int minion = unit.MinionsKilled * 19;
+                int supermonster = unit.SuperMonsterKilled * 300;
+                int neutralminion = unit.NeutralMinionsKilled * 35;
+                int wards = unit.WardsKilled * 30;
+                float tempo = Game.Time;
+                bool countspawn = false;
+
+
+                foreach (var m in unit.Masteries)
+                {
+
+                    if (m.Id == 114 && m.Page.Equals(MasteryPage.Utility))
+                    {
+                        ouroinicial = 515;
+                    }
+
+                    if (m.Id == 97 && m.Points == 1 && m.Page.Equals(MasteryPage.Utility))
+                    {
+                        ouropsegundo = 19.5f;
+                    }
+                    if (m.Id == 97 && m.Points == 2 && m.Page.Equals(MasteryPage.Utility))
+                    {
+                        ouropsegundo = 20;
+                    }
+                    if (m.Id == 97 && m.Points == 3 && m.Page.Equals(MasteryPage.Utility))
+                    {
+                        ouropsegundo = 20.5f;
+                    }
+
+                }
+
+                GameObject.OnCreate += (sender, e) =>
+                {
+                    var minionn = sender as Obj_AI_Minion;
+                    if (minionn != null)
+                    {
+                        countspawn = true;
+                    }
+                    if (countspawn)
+                    {
+                        ouroptempo = (((tempo - 130) / 10) * ouropsegundo) + ouroinicial;
+                    }
+                };
+
+
+                foreach (var slot in ObjectManager.Get<Obj_AI_Hero>().Where(x => x.IsValid).SelectMany(hero => hero.InventoryItems))
+                {
+                    Console.WriteLine(slot.Id);
+                }
+
+                ourototal = ouroptempo + (unit.ChampionsKilled * 300) + (unit.Assists * 75) + minion + supermonster + neutralminion;
+
+
+
+                //if (Menu.Item("Enable").GetValue<bool>() == true) don't know why isn't working, gonna fix later
+                //{
+
+                    string msg = "Total gold: " + (int)Math.Ceiling(ourototal);
+                    if (unit.Name == Player.Name)
+                    {
+                        msg = "Total gold: " + (int)Math.Ceiling(Player.Gold);
+                    }
+
+                    var wts = Drawing.WorldToScreen(unit.Position);
+                    Drawing.DrawText(wts[0] - (msg.Length) * 10, wts[1], System.Drawing.Color.Yellow, msg);
+                //}
+
+
+            }
+
+        }
+
+        private static void Game_OnGameUpdate(EventArgs args)
+        {
+
+
+
+        }
+
+
+    }
+
+}
