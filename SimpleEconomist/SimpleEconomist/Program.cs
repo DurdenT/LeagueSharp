@@ -1,14 +1,9 @@
-﻿using System;
+using System;
 using System.Linq;
 using LeagueSharp;
 using LeagueSharp.Common;
-using SharpDX;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
-using System.IO;
-using System.Diagnostics;
 using Collision = LeagueSharp.Common.Collision;
 
 //Noob code, if you can help me improve it, thank you. Just learning. 
@@ -22,11 +17,7 @@ namespace SimpleEconomist
         public static List<Obj_AI_Hero> allies = HeroManager.Allies;
         public static List<Obj_AI_Hero> enemies = HeroManager.Enemies;
         //public static Dictionary<Obj_AI_Hero, double> enemyDictionary = new Dictionary<Obj_AI_Hero, double>();
-        public static float ouroinicial = 475;
-        public static float ouroptempo = 0;
-        public static float ouropsegundo = 19;
-        public static float ourototal = 0;
-        public static float reward = 0;
+        
 
 
         public static Menu Menu;
@@ -71,7 +62,12 @@ namespace SimpleEconomist
                 int neutralminion = unit.NeutralMinionsKilled * 35;
                 int wards = unit.WardsKilled * 30;
                 float tempo = Game.Time;
-                bool countspawn = false;
+                
+                float ouroinicial = 475;
+                float ouroptempo = 0;
+                float ouropsegundo = 19;
+                float ourototal = 0;
+
 
 
                 foreach (var m in unit.Masteries)
@@ -97,20 +93,11 @@ namespace SimpleEconomist
 
                 }
 
-                GameObject.OnCreate += (sender, e) =>
+                if (tempo >= 130)
                 {
-                    var minionn = sender as Obj_AI_Minion;
-                    if (minionn != null)
-                    {
-                        countspawn = true;
-                    }
-                    if (countspawn)
-                    {
-                        ouroptempo = (((tempo - 130) / 10) * ouropsegundo) + ouroinicial;
-                    }
-                };
-
-
+                    ouroptempo = (((tempo - 130) / 10) * ouropsegundo) + ouroinicial;
+                }
+                
 
 
                 ourototal = (ouroptempo) + (unit.ChampionsKilled * 300) + (unit.Assists * 75) + (minion + supermonster + neutralminion + wards);
@@ -120,14 +107,14 @@ namespace SimpleEconomist
                 //if (Menu.Item("Enable").GetValue<bool>() == true) don't know why isn't working, gonna fix later
                 //{
 
-                    string msg = "Total gold: " + (int)Math.Ceiling(ourototal);
-                    if (unit.Name == Player.Name)
-                    {
-                        msg = "Total gold: " + (int)Math.Ceiling(Player.GoldTotal);
-                    }
+                string msg = "Total gold: " + (int)Math.Ceiling(ourototal);
+                if (unit.Name == Player.Name)
+                {
+                    msg = "Total gold: " + (int)Math.Ceiling(Player.GoldTotal);
+                }
 
-                    var wts = Drawing.WorldToScreen(unit.Position);
-                    Drawing.DrawText(wts[0] - (msg.Length) * 10, wts[1], System.Drawing.Color.Yellow, msg);
+                var wts = Drawing.WorldToScreen(unit.Position);
+                Drawing.DrawText(wts[0] - (msg.Length) * 10, wts[1], System.Drawing.Color.Yellow, msg);
                 //}
 
 
