@@ -9,7 +9,7 @@ namespace Kalista
     public class Config
     {
         private static bool initialized = false;
-        private const string MENU_TITLE = "[Hellsing] " + Program.CHAMP_NAME;
+        private const string MENU_TITLE = "Kaliscrank by DurdenT";
 
         private static MenuWrapper _menu;
 
