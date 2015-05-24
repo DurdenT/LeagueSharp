@@ -61,7 +61,7 @@ namespace SimpleEconomist
                 int supermonster = unit.SuperMonsterKilled * 300;
                 int neutralminion = unit.NeutralMinionsKilled * 35;
                 int wards = unit.WardsKilled * 30;
-                float tempo = Game.Time;
+                float tempo = Game.ClockTime;
                 
                 float ouroinicial = 475;
                 float ouroptempo = 0;
@@ -93,9 +93,9 @@ namespace SimpleEconomist
 
                 }
 
-                if (tempo >= 130)
+                if (tempo >= 90)
                 {
-                    ouroptempo = (((tempo - 130) / 10) * ouropsegundo) + ouroinicial;
+                    ouroptempo = (((tempo - 90) / 10) * ouropsegundo) + ouroinicial;
                 }
                 
 
