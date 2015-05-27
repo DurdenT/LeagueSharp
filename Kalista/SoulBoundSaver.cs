@@ -50,11 +50,19 @@ namespace KalistaResurrection
                 if (SoulBound.HealthPercentage() < 5 && SoulBound.CountEnemiesInRange(500) > 0 ||
                     IncomingDamage > SoulBound.Health)
                     R.Cast();
+                 // Get enemies
                 foreach (var unit in ObjectManager.Get<Obj_AI_Hero>().Where(h => h.IsEnemy && h.IsHPBarRendered))
                 {
+                    // Get buffs
                     for (int i = 0; i < unit.Buffs.Count(); i++)
                     {
-                        if (unit.Buffs[i].Name == "rocketgrab2" && unit.Buffs[i].IsActive)
+                        // Check if the Soulbound is in a good range
+                        var enemy = HeroManager.Enemies.Where(x => SoulBound.Distance(x.Position) < 925 && SoulBound.Distance(x.Position) > 800);
+                        // Check if the Soulbound is a Blitzcrank
+                        // Check if the enemy is hooked
+                        // Check if target is far enough for ult
+                        // Check if Kaliscrank option is true
+                        if (SoulBound.ChampionName == "Blitzcrank" && unit.Buffs[i].Name == "rocketgrab2" && unit.Buffs[i].IsActive && enemy.Count() > 0 && Config.Misc.UseKaliscrank)
                         {
                             R.Cast();
                         }
