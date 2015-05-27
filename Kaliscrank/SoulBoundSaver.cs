@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -53,11 +53,11 @@ namespace KalistaResurrection
                     for (int i = 0; i < unit.Buffs.Count(); i++)
                     {
                         // Check if the Soulbound is in a good range
-                        var enemy = HeroManager.Enemies.Where(x => SoulBound.Distance(x.Position) < 925 && SoulBound.Distance(x.Position) > 800);
+                        var enemy = HeroManager.Enemies.Where(x => SoulBound.Distance(x.Position) > 800);
                         // Check if the Soulbound is a Blitzcrank
                         // Check if the enemy is hooked
                         // Check if target was far enough for ult
-                        if (SoulBound.ChampionName == "Blitzcrank" && unit.Buffs[i].Name == "rocketgrab2" && unit.Buffs[i].IsActive && enemy.Count() > 0)
+                        if (SoulBound.ChampionName == "Blitzcrank" && unit.Buffs[i].Name == "rocketgrab2" && unit.Buffs[i].IsActive && enemy.Count() > 0 && Config.Misc.UseKaliscrank)
                         {
                             R.Cast();
                         }

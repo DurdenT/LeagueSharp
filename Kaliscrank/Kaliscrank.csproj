@@ -2,53 +2,48 @@
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{42606AD6-93E1-4794-8635-264BD767E899}</ProjectGuid>
+    <ProjectGuid>{46FA998C-17DD-4B88-B321-6B9F69B367FA}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Kaliscrank</RootNamespace>
-    <AssemblyName>Kaliscrank</AssemblyName>
+    <AssemblyName>KalistaResurrection</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <PreBuildEvent />
+    <PostBuildEvent />
+    <OutputPath>bin\Release</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\Release</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BehaviorSharp">
-      <HintPath>..\..\..\..\..\Downloads\LeagueSharp\System\BehaviorSharp.dll</HintPath>
-    </Reference>
     <Reference Include="LeagueSharp">
-      <HintPath>..\..\..\..\..\Downloads\LeagueSharp\System\LeagueSharp.dll</HintPath>
+      <HintPath>C:\Users\Stevan\Downloads\LeagueSharp\System\LeagueSharp.dll</HintPath>
     </Reference>
     <Reference Include="LeagueSharp.Common">
-      <HintPath>..\..\..\..\..\Downloads\LeagueSharp\System\LeagueSharp.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="LeagueSharp.Console">
-      <HintPath>..\..\..\..\..\Downloads\LeagueSharp\System\LeagueSharp.Console.dll</HintPath>
+      <HintPath>C:\Users\Stevan\Downloads\LeagueSharp\System\LeagueSharp.Common.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX">
-      <HintPath>..\..\..\..\..\Downloads\LeagueSharp\System\SharpDX.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpDX.Direct3D9">
-      <HintPath>..\..\..\..\..\Downloads\LeagueSharp\System\SharpDX.Direct3D9.dll</HintPath>
+      <HintPath>C:\Users\Stevan\Downloads\LeagueSharp\System\SharpDX.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -60,8 +55,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config.cs" />
+    <Compile Include="Core.cs" />
+    <Compile Include="DamageIndicator.cs" />
+    <Compile Include="Damages.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="ItemManager.cs" />
+    <Compile Include="ModeLogic.cs" />
+    <Compile Include="Modes\Flee.cs" />
+    <Compile Include="Modes\JungleClear.cs" />
+    <Compile Include="Modes\PermaActive.cs" />
+    <Compile Include="Modes\WaveClear.cs" />
+    <Compile Include="Modes\Harass.cs" />
+    <Compile Include="Modes\Combo.cs" />
+    <Compile Include="Modes\ModeBase.cs" />
+    <Compile Include="Hero.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SoulBoundSaver.cs" />
+    <Compile Include="SpellManager.cs" />
+    <Compile Include="UpdateChecker.cs" />
+    <Compile Include="VectorHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
