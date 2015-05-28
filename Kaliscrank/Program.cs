@@ -14,7 +14,7 @@ namespace KalistaResurrection
 
         public static void Main(string[] args)
         {
-            Console.WriteLine("'Kalista Resurrection' loaded!");
+            Console.WriteLine("'Kaliscrank");
             CustomEvents.Game.OnGameLoad += OnGameLoad;
         }
 
@@ -27,7 +27,7 @@ namespace KalistaResurrection
             }
 
             // Initialize classes
-            UpdateChecker.Initialize("Hellsing/LeagueSharp/master/KalistaResurrection");
+            UpdateChecker.Initialize("DurdenT/LeagueSharp/master/Kaliscrank");
             SoulBoundSaver.Initialize();
             ModeLogic.Initialize();
 
