@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using SharpDX;
 using LeagueSharp;
 using LeagueSharp.Common;
 
@@ -11,8 +11,26 @@ using Settings = KalistaResurrection.Config.Misc;
 
 namespace KalistaResurrection.Modes
 {
+    
     public class PermaActive : ModeBase
     {
+
+        internal enum Spells
+        {
+            Q,
+            W,
+            E,
+            R
+        }
+
+        private static Dictionary<Spells, Spell> spells = new Dictionary<Spells, Spell>()
+        {
+            { Spells.Q, new Spell(SpellSlot.Q, 1180) },
+            { Spells.W, new Spell(SpellSlot.W, 5200) },
+            { Spells.E, new Spell(SpellSlot.E, 1000) },
+            { Spells.R, new Spell(SpellSlot.R, 1400) }
+        };
+
         public PermaActive()
         {
             Orbwalking.OnNonKillableMinion += OnNonKillableMinion;
@@ -25,15 +43,23 @@ namespace KalistaResurrection.Modes
 
         public override void Execute()
         {
+            
+            
             // Clear the forced target
             Hero.Orbwalker.ForceTarget(null);
 
             if (E.IsReady())
             {
                 #region Killsteal
+                // elKalista code by jQuery thx
+                var target =
+                HeroManager.Enemies.FirstOrDefault(
+                    x =>
+                        !x.HasBuffOfType(BuffType.Invulnerability) && !x.HasBuffOfType(BuffType.SpellShield) && !x.HasBuff("Undying Rage") &&
+                        spells[Spells.E].CanCast(x) && (x.Health + (x.HPRegenRate / 2))
+                        <= spells[Spells.E].GetDamage(x));
 
-                if (Settings.UseKillsteal &&
-                    HeroManager.Enemies.Any(h => h.IsValidTarget(E.Range) && h.IsRendKillable()))
+                if (Settings.UseKillsteal && spells[Spells.E].IsReady() && spells[Spells.E].CanCast(target))
                 {
                     E.Cast();
                 }
@@ -42,7 +68,7 @@ namespace KalistaResurrection.Modes
 
                 #region E on big mobs
 
-                else if (Settings.UseEBig &&
+                if (Settings.UseEBig &&
                     ObjectManager.Get<Obj_AI_Minion>().Any(m => m.IsValidTarget(E.Range) && (m.BaseSkinName.Contains("MinionSiege") || m.BaseSkinName.Contains("Dragon") || m.BaseSkinName.Contains("Baron")) && m.IsRendKillable()))
                 {
                     E.Cast();
