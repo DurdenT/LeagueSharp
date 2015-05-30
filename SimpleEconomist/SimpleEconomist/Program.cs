@@ -85,7 +85,7 @@ namespace SimpleEconomist
                     var minionn = sender as Obj_AI_Minion;
                     if (minionn != null)
                     {
-                        ouroptempo = (((tempo - 90) / 10) * ouropsegundo) + ouroinicial - 80;
+                        ouroptempo = ((((tempo - 90) / 10) * ouropsegundo) + ouroinicial) - 80;
                     }
                 };
                 
