@@ -80,14 +80,18 @@ namespace SimpleEconomist
 
                 }
 
-                if (tempo >= 130)
+                GameObject.OnCreate += (sender, e) =>
                 {
-                    ouroptempo = (((tempo - 90) / 10) * ouropsegundo) + ouroinicial;
-                }
+                    var minionn = sender as Obj_AI_Minion;
+                    if (minionn != null)
+                    {
+                        ouroptempo = (((tempo - 90) / 10) * ouropsegundo) + ouroinicial;
+                    }
+                };
                 
                 ourototal = (ouroptempo) + (unit.ChampionsKilled * 300) + (unit.Assists * 75) + (minion + supermonster + neutralminion + wards);
 
-                string msg = "Total gold: " + (int)Math.Ceiling(ourototal);
+                string msg = "L$: " + (int)Math.Ceiling(ourototal);
                 if (unit.Name == Player.Name)
                 {
                     msg = "L$: " + (int)Math.Ceiling(Player.GoldTotal);
