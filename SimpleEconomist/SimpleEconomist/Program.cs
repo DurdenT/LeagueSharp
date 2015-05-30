@@ -80,15 +80,8 @@ namespace SimpleEconomist
 
                 }
 
-                GameObject.OnCreate += (sender, e) =>
-                {
-                    var minionn = sender as Obj_AI_Minion;
-                    if (minionn != null)
-                    {
                         ouroptempo = (((tempo - 90) / 10) * ouropsegundo) + ouroinicial;
-                    }
-                };
-                
+
                 ourototal = (ouroptempo) + (unit.ChampionsKilled * 300) + (unit.Assists * 75) + (minion + supermonster + neutralminion + wards);
 
                 string msg = "L$: " + (int)Math.Ceiling(ourototal);
