@@ -16,24 +16,18 @@ namespace SimpleEconomist
     {
         public static List<Obj_AI_Hero> allies = HeroManager.Allies;
         public static List<Obj_AI_Hero> enemies = HeroManager.Enemies;
-        //public static Dictionary<Obj_AI_Hero, double> enemyDictionary = new Dictionary<Obj_AI_Hero, double>();
-        
-
-
+        //public static Dictionary<Obj_AI_Hero, double> enemyDictionary = new Dictionary<Obj_AI_Hero, double>()
         public static Menu Menu;
         public static Obj_AI_Hero Player
         {
             get { return ObjectManager.Player; }
         }
 
-
         public static void Main(string[] args)
         {
             CustomEvents.Game.OnGameLoad += Game_OnGameLoad;
             Game.OnUpdate += Game_OnGameUpdate;
             Drawing.OnDraw += Drawing_OnDraw;
-
-
 
         }
 
@@ -49,26 +43,19 @@ namespace SimpleEconomist
         public static void Drawing_OnDraw(EventArgs args)
         {
 
-
             foreach (var unit in ObjectManager.Get<Obj_AI_Hero>().Where(h => h.IsValid && h.IsHPBarRendered))
             {
-
-
-
-
 
                 int minion = unit.MinionsKilled * 19;
                 int supermonster = unit.SuperMonsterKilled * 300;
                 int neutralminion = unit.NeutralMinionsKilled * 35;
                 int wards = unit.WardsKilled * 30;
-                float tempo = Game.ClockTime;
+                float tempo = Game.Time;
                 
                 float ouroinicial = 475;
                 float ouroptempo = 0;
                 float ouropsegundo = 19;
                 float ourototal = 0;
-
-
 
                 foreach (var m in unit.Masteries)
                 {
@@ -93,30 +80,21 @@ namespace SimpleEconomist
 
                 }
 
-                if (tempo >= 90)
+                if (tempo >= 130)
                 {
                     ouroptempo = (((tempo - 90) / 10) * ouropsegundo) + ouroinicial;
                 }
                 
-
-
                 ourototal = (ouroptempo) + (unit.ChampionsKilled * 300) + (unit.Assists * 75) + (minion + supermonster + neutralminion + wards);
-
-
-
-                //if (Menu.Item("Enable").GetValue<bool>() == true) don't know why isn't working, gonna fix later
-                //{
 
                 string msg = "Total gold: " + (int)Math.Ceiling(ourototal);
                 if (unit.Name == Player.Name)
                 {
-                    msg = "Total gold: " + (int)Math.Ceiling(Player.GoldTotal);
+                    msg = "L$: " + (int)Math.Ceiling(Player.GoldTotal);
                 }
 
                 var wts = Drawing.WorldToScreen(unit.Position);
                 Drawing.DrawText(wts[0] - (msg.Length) * 10, wts[1], System.Drawing.Color.Yellow, msg);
-                //}
-
 
             }
 
