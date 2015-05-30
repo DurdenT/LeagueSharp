@@ -79,9 +79,9 @@ namespace SimpleEconomist
                     }
 
                 }
-
+                    if (tempo >= 130){
                         ouroptempo = (((tempo - 90) / 10) * ouropsegundo) + ouroinicial;
-
+                    }
                 ourototal = (ouroptempo) + (unit.ChampionsKilled * 300) + (unit.Assists * 75) + (minion + supermonster + neutralminion + wards);
 
                 string msg = "L$: " + (int)Math.Ceiling(ourototal);
