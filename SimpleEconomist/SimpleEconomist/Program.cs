@@ -80,7 +80,7 @@ namespace SimpleEconomist
 
                 }
                     if (tempo >= 130){
-                        ouroptempo = (((tempo - 130) / 10) * ouropsegundo) + ouroinicial;
+                        ouroptempo = (((tempo - 130) / 10) * ouropsegundo) + ouroinicial - 30;
                     }
                 ourototal = (ouroptempo) + (unit.ChampionsKilled * 300) + (unit.Assists * 75) + (minion + supermonster + neutralminion + wards);
 
