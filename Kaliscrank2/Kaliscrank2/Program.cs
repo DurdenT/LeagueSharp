@@ -5,7 +5,6 @@ using LeagueSharp;
 using LeagueSharp.Common;
 using SharpDX;
 using SharpDX.Direct3D9;
-using LeagueSharp.Console;
 using Collision = LeagueSharp.Common.Collision;
 
 namespace Kaliscrank2
@@ -25,13 +24,13 @@ namespace Kaliscrank2
         }
         static void Game_OnGameLoad(EventArgs args)
         {
-            //if (Player.ChampionName == "Kalista")
-            //{
+            if (Player.ChampionName == "Kalista")
+            {
                 Menu = new Menu("Kaliscrank2", "kaliscrank2", true);
                 Menu.AddItem(new MenuItem("Enable", "Enable", true).SetValue(true));
                 Menu.AddToMainMenu();
-                LeagueSharp.Console.Console.WriteLine("Loaded.");
-           // }
+
+            }
             
         }
         static void Obj_AI_Hero_OnProcessSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
