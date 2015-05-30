@@ -5,7 +5,7 @@ using LeagueSharp;
 using LeagueSharp.Common;
 using SharpDX;
 using SharpDX.Direct3D9;
-using LeagueSharp.Console;
+//using LeagueSharp.Console;
 using Collision = LeagueSharp.Common.Collision;
 
 namespace Kaliscrank2
@@ -24,7 +24,7 @@ namespace Kaliscrank2
             Menu = new Menu("Kaliscrank", "kaliscrank", true);
 
             Menu.SubMenu("Misc").AddItem(new MenuItem("kaliscrank", "Use Kaliscrank", true).SetValue(true));
-            LeagueSharp.Console.Console.WriteLine("Kaliscrank Loaded");
+            //LeagueSharp.Console.Console.WriteLine("Kaliscrank Loaded");
         }
         static void Obj_AI_Hero_OnProcessSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
