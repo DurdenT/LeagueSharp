@@ -24,7 +24,7 @@ namespace Kaliscrank2
         }
         static void Game_OnGameLoad(EventArgs args)
         {
-            Menu = new Menu("Kaliscrank", "kaliscrank", true);
+            Menu = new Menu("Kaliscrank2", "kaliscrank", true);
             Menu.AddItem(new MenuItem("Enable", "Enable", true).SetValue(true));
             Menu.AddToMainMenu();
             
