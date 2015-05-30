@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using LeagueSharp;
@@ -13,7 +13,15 @@ namespace Kaliscrank2
     {
         static Spell Q, W, E, R;
         internal static Menu Menu;
-
+        
+        static void Main(string[] args)
+        {
+            CustomEvents.Game.OnGameLoad += Game_OnGameLoad;
+        }
+        static void Game_OnGameLoad(EventArgs args)
+        {
+            
+        }
         static void Obj_AI_Hero_OnProcessSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
             Q = new Spell(SpellSlot.Q, 1150f);
