@@ -20,7 +20,9 @@ namespace Kaliscrank2
         }
         static void Game_OnGameLoad(EventArgs args)
         {
-            
+            Menu = new Menu("Kaliscrank", "kaliscrank", true);
+
+            Menu.SubMenu("Misc").AddItem(new MenuItem("kaliscrank", "Use Kaliscrank", true).SetValue(true));
         }
         static void Obj_AI_Hero_OnProcessSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
@@ -29,9 +31,6 @@ namespace Kaliscrank2
             E = new Spell(SpellSlot.E, 1000f);
             R = new Spell(SpellSlot.R, 1500f);
 
-            Menu = new Menu("Kaliscrank", "kaliscrank", true);
-
-            Menu.SubMenu("Misc").AddItem(new MenuItem("kaliscrank", "Use Kaliscrank", true).SetValue(true));
 
             foreach (var unit in ObjectManager.Get<Obj_AI_Hero>().Where(h => h.IsEnemy && h.IsHPBarRendered))
             {
