@@ -50,8 +50,8 @@ namespace SimpleEconomist
                 int supermonster = unit.SuperMonsterKilled * 300;
                 int neutralminion = unit.NeutralMinionsKilled * 35;
                 int wards = unit.WardsKilled * 30;
-                float tempo = Game.Time;
                 
+                float tempo = Game.Time;
                 float ouroinicial = 475;
                 float ouroptempo = 0;
                 float ouropsegundo = 19;
@@ -85,7 +85,7 @@ namespace SimpleEconomist
                     var minionn = sender as Obj_AI_Minion;
                     if (minionn != null)
                     {
-                        ouroptempo = (((tempo - 130) / 10) * ouropsegundo) + ouroinicial;
+                        ouroptempo = (((tempo - 90) / 10) * ouropsegundo) + ouroinicial;
                     }
                 };
                 
