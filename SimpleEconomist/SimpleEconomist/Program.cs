@@ -14,6 +14,7 @@ namespace SimpleEconomist
 
     internal class Program
     {
+        public static int tempo = 0;
         public static List<Obj_AI_Hero> allies = HeroManager.Allies;
         public static List<Obj_AI_Hero> enemies = HeroManager.Enemies;
         //public static Dictionary<Obj_AI_Hero, double> enemyDictionary = new Dictionary<Obj_AI_Hero, double>()
@@ -26,8 +27,9 @@ namespace SimpleEconomist
         public static void Main(string[] args)
         {
             CustomEvents.Game.OnGameLoad += Game_OnGameLoad;
-            Game.OnUpdate += Game_OnGameUpdate;
             Drawing.OnDraw += Drawing_OnDraw;
+            Game.OnStart += OnGameStart;
+            
 
         }
 
@@ -51,7 +53,6 @@ namespace SimpleEconomist
                 int neutralminion = unit.NeutralMinionsKilled * 35;
                 int wards = unit.WardsKilled * 30;
                 
-                float tempo = Game.Time;
                 float ouroinicial = 475;
                 float ouroptempo = 0;
                 float ouropsegundo = 19;
@@ -79,8 +80,10 @@ namespace SimpleEconomist
                     }
 
                 }
-                    if (tempo >= 130){
-                        ouroptempo = (((tempo - 130) / 10) * ouropsegundo) + ouroinicial;
+
+                
+                    if (tempo >= 90){
+                        ouroptempo = (((tempo - 90) / 10) * ouropsegundo) + ouroinicial;
                     }
                 ourototal = (ouroptempo) + (unit.ChampionsKilled * 300) + (unit.Assists * 75) + (minion + supermonster + neutralminion + wards);
 
@@ -97,11 +100,13 @@ namespace SimpleEconomist
 
         }
 
-        private static void Game_OnGameUpdate(EventArgs args)
+        public static void OnGameStart(EventArgs args)
         {
-
-
-
+            if (tempo > 0)
+            {
+                tempo = tempo + 1;
+            }
+            
         }
 
 
