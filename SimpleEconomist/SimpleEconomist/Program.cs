@@ -103,7 +103,7 @@ namespace SimpleEconomist
 
         public static void Game_OnUpdate(Object sender)
         {
-            tempo = Environment.TickCount / 1000f;
+            tempo = Environment.TickCount / 1000;
             
         }
 
