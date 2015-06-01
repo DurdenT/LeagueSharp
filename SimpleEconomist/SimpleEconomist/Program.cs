@@ -15,7 +15,7 @@ namespace SimpleEconomist
 
     internal class Program
     {
-        public static float tempo = 0;
+        public static int tempo = 0;
         public static List<Obj_AI_Hero> allies = HeroManager.Allies;
         public static List<Obj_AI_Hero> enemies = HeroManager.Enemies;
         //public static Dictionary<Obj_AI_Hero, double> enemyDictionary = new Dictionary<Obj_AI_Hero, double>()
@@ -103,7 +103,7 @@ namespace SimpleEconomist
 
         public static void Game_OnUpdate(Object sender)
         {
-            tempo = Environment.TickCount / 1000f;
+            tempo = Environment.TickCount / 1000;
             
         }
 
