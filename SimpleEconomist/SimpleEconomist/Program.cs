@@ -4,6 +4,7 @@ using LeagueSharp;
 using LeagueSharp.Common;
 using System.Collections.Generic;
 using System.Text;
+using System.Timers;
 using Collision = LeagueSharp.Common.Collision;
 
 //Noob code, if you can help me improve it, thank you. Just learning. 
@@ -28,7 +29,7 @@ namespace SimpleEconomist
         {
             CustomEvents.Game.OnGameLoad += Game_OnGameLoad;
             Drawing.OnDraw += Drawing_OnDraw;
-            Game.OnStart += OnGameStart;
+            Game.OnUpdate += Game_OnUpdate;
             
 
         }
@@ -87,7 +88,7 @@ namespace SimpleEconomist
                     }
                 ourototal = (ouroptempo) + (unit.ChampionsKilled * 300) + (unit.Assists * 75) + (minion + supermonster + neutralminion + wards);
 
-                string msg = "L$: " + (int)Math.Ceiling(ourototal);
+                string msg = "L$: " + (int)Math.Ceiling(ourototal) + " tempo " + tempo;
                 if (unit.Name == Player.Name)
                 {
                     msg = "L$: " + (int)Math.Ceiling(Player.GoldTotal);
@@ -100,7 +101,7 @@ namespace SimpleEconomist
 
         }
 
-        public static void OnGameStart(EventArgs args)
+        public static void Game_OnUpdate(EventArgs args)
         {
             if (tempo > 0)
             {
