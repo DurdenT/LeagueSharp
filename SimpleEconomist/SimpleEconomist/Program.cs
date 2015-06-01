@@ -101,7 +101,7 @@ namespace SimpleEconomist
 
         }
 
-        public static void Game_OnUpdate(EventArgs args)
+        public static void Game_OnUpdate(Object sender)
         {
             if (tempo > 0)
             {
