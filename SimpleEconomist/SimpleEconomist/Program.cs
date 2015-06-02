@@ -29,8 +29,8 @@ namespace SimpleEconomist
         {
             CustomEvents.Game.OnGameLoad += Game_OnGameLoad;
             Drawing.OnDraw += Drawing_OnDraw;
-            Game.OnUpdate += Game_OnUpdate;
-            
+            Game.OnStart += Game_OnStart;
+
 
         }
 
@@ -53,7 +53,7 @@ namespace SimpleEconomist
                 int supermonster = unit.SuperMonsterKilled * 300;
                 int neutralminion = unit.NeutralMinionsKilled * 35;
                 int wards = unit.WardsKilled * 30;
-                
+
                 float ouroinicial = 475;
                 float ouroptempo = 0;
                 float ouropsegundo = 19;
@@ -82,10 +82,11 @@ namespace SimpleEconomist
 
                 }
 
-                
-                    if (tempo >= 22130){
-                        ouroptempo = (((tempo - 22130) / 10) * ouropsegundo) + ouroinicial;
-                    }
+
+                if (tempo >= 22130)
+                {
+                    ouroptempo = (((tempo - 22130) / 10) * ouropsegundo) + ouroinicial;
+                }
                 ourototal = (ouroptempo) + (unit.ChampionsKilled * 300) + (unit.Assists * 75) + (minion + supermonster + neutralminion + wards);
 
                 string msg = "L$: " + (int)Math.Ceiling(ourototal);
@@ -101,10 +102,10 @@ namespace SimpleEconomist
 
         }
 
-        public static void Game_OnUpdate(Object sender)
+        public static void Game_OnMinionSpawn(Object sender)
         {
             tempo = Environment.TickCount / 1000;
-            
+
         }
 
 
