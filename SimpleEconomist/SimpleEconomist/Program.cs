@@ -89,7 +89,7 @@ namespace SimpleEconomist
                 }
                 ourototal = (ouroptempo) + (unit.ChampionsKilled * 300) + (unit.Assists * 75) + (minion + supermonster + neutralminion + wards);
 
-                string msg = "L$: " + (int)Math.Ceiling(ourototal);
+                string msg = "L$: " + (int)Math.Ceiling(ourototal) + " tempo " + tempo;
                 if (unit.Name == Player.Name)
                 {
                     msg = "L$: " + (int)Math.Ceiling(Player.GoldTotal);
@@ -104,8 +104,13 @@ namespace SimpleEconomist
 
         public static void Game_OnStart(Object sender)
         {
-            tempo = Environment.TickCount / 1000;
+            
+            var minionn = GameEventId.OnMinionsSpawn;
 
+            if (minionn != 0)
+            {
+                tempo = Environment.TickCount / 1000;
+            }
         }
 
 
