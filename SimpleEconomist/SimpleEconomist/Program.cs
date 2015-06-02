@@ -102,7 +102,7 @@ namespace SimpleEconomist
 
         }
 
-        public static void Game_OnMinionSpawn(Object sender)
+        public static void Game_OnStart(Object sender)
         {
             tempo = Environment.TickCount / 1000;
 
