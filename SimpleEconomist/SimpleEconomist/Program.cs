@@ -89,7 +89,7 @@ namespace SimpleEconomist
                 }
                 ourototal = (ouroptempo) + (unit.ChampionsKilled * 300) + (unit.Assists * 75) + (minion + supermonster + neutralminion + wards);
 
-                string msg = "L$: " + (int)Math.Ceiling(ourototal) + tempo;
+                string msg = "L$: " + (int)Math.Ceiling(ourototal);
                 if (unit.Name == Player.Name)
                 {
                     msg = "L$: " + (int)Math.Ceiling(Player.GoldTotal);
