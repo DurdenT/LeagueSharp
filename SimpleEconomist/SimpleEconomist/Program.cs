@@ -15,7 +15,8 @@ namespace SimpleEconomist
 
     internal class Program
     {
-        public static int tempo = 0;
+        public static float ClockTimeAdjust = 0;
+        public static int CampRespawnTime = 0;
         public static List<Obj_AI_Hero> allies = HeroManager.Allies;
         public static List<Obj_AI_Hero> enemies = HeroManager.Enemies;
         //public static Dictionary<Obj_AI_Hero, double> enemyDictionary = new Dictionary<Obj_AI_Hero, double>()
@@ -83,13 +84,13 @@ namespace SimpleEconomist
                 }
 
 
-                if (tempo >= 22130)
+                if (ClockTimeAdjust >= 130)
                 {
-                    ouroptempo = (((tempo - 22130) / 10) * ouropsegundo) + ouroinicial;
+                    ouroptempo = (((ClockTimeAdjust - 130) / 10) * ouropsegundo) + ouroinicial;
                 }
                 ourototal = (ouroptempo) + (unit.ChampionsKilled * 300) + (unit.Assists * 75) + (minion + supermonster + neutralminion + wards);
 
-                string msg = "L$: " + (int)Math.Ceiling(ourototal) + " tempo " + tempo;
+                string msg = "L$: " + (int)Math.Ceiling(ourototal);
                 if (unit.Name == Player.Name)
                 {
                     msg = "L$: " + (int)Math.Ceiling(Player.GoldTotal);
@@ -104,13 +105,11 @@ namespace SimpleEconomist
 
         public static void Game_OnStart(Object sender)
         {
-            
-            var minionn = GameEventId.OnMinionsSpawn;
 
-            if (minionn != 0)
-            {
-                tempo = Environment.TickCount / 1000;
-            }
+            ClockTimeAdjust = Game.ClockTime;
+
+            CampRespawnTime = (int)((145f + Game.ClockTime) * 1000) + Environment.TickCount;
+
         }
 
 
