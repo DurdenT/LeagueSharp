@@ -5,6 +5,7 @@ using LeagueSharp.Common;
 using System.Collections.Generic;
 using System.Text;
 using System.Timers;
+
 using Collision = LeagueSharp.Common.Collision;
 
 //Noob code, if you can help me improve it, thank you. Just learning. 
@@ -15,7 +16,7 @@ namespace SimpleEconomist
 
     internal class Program
     {
-
+        public static Timer timer = new Timer();
         public static List<Obj_AI_Hero> allies = HeroManager.Allies;
         public static List<Obj_AI_Hero> enemies = HeroManager.Enemies;
         //public static Dictionary<Obj_AI_Hero, double> enemyDictionary = new Dictionary<Obj_AI_Hero, double>()
@@ -30,7 +31,6 @@ namespace SimpleEconomist
             CustomEvents.Game.OnGameLoad += Game_OnGameLoad;
             Drawing.OnDraw += Drawing_OnDraw;
 
-
         }
 
         private static void Game_OnGameLoad(EventArgs args)
@@ -40,7 +40,6 @@ namespace SimpleEconomist
             Menu.AddToMainMenu();
 
         }
-
 
         public static void Drawing_OnDraw(EventArgs args)
         {
@@ -79,14 +78,18 @@ namespace SimpleEconomist
                     {
                         ouropsegundo = 20.5f;
                     }
-
+                    if (m.Id == 114 && m.Page.Equals(MasteryPage.Utility) && Player.GoldTotal > 515)
+                    {
+                        ouroptempo = (((tempo - 125) / 10) * ouropsegundo) + ouroinicial;
+                    }
+                    if (m.Id != 114 && !m.Page.Equals(MasteryPage.Utility) && Player.GoldTotal > 475)
+                    {
+                        ouroptempo = (((tempo - 125) / 10) * ouropsegundo) + ouroinicial;
+                    }
                 }
 
 
-                if (tempo >= 125)
-                {
-                    ouroptempo = (((tempo - 125) / 10) * ouropsegundo) + ouroinicial;
-                }
+
                 ourototal = (ouroptempo) + (unit.ChampionsKilled * 300) + (unit.Assists * 75) + (minion + supermonster + neutralminion + wards);
 
                 string msg = "L$: " + (int)Math.Ceiling(ourototal);
