@@ -78,17 +78,13 @@ namespace SimpleEconomist
                     {
                         ouropsegundo = 20.5f;
                     }
-                    if (m.Id == 114 && m.Page.Equals(MasteryPage.Utility) && Player.GoldTotal > 515)
-                    {
-                        ouroptempo = (((tempo - 125) / 10) * ouropsegundo) + ouroinicial;
-                    }
-                    if (m.Id != 114 && !m.Page.Equals(MasteryPage.Utility) && Player.GoldTotal > 475)
-                    {
-                        ouroptempo = (((tempo - 125) / 10) * ouropsegundo) + ouroinicial;
-                    }
+                    
                 }
 
-
+                if (Player.GoldTotal > ouroinicial)
+                {
+                    ouroptempo = (((tempo - 125) / 10) * ouropsegundo) + ouroinicial;
+                }
 
                 ourototal = (ouroptempo) + (unit.ChampionsKilled * 300) + (unit.Assists * 75) + (minion + supermonster + neutralminion + wards);
 
