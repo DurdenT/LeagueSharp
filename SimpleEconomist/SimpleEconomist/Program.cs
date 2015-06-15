@@ -81,7 +81,7 @@ namespace SimpleEconomist
                     
                 }
 
-                if (Player.GoldTotal > 475)
+                if (Player.GoldTotal > ouroinicial)
                 {
                     ouroptempo = (((tempo - 125) / 10) * ouropsegundo) + ouroinicial;
                 }
